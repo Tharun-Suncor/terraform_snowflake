@@ -34,7 +34,7 @@ module "snowflake_warehouse" {
 module "snowflake_warehouse_2" {
   source = "./modules/snowflake_warehouse"
 
-  name                 = "my_warehouse_2"
+  name                 = "my_warehouse_3"
   comment              = "This is my second warehouse"
   size                 = "MEDIUM"
   auto_suspend         = 120
