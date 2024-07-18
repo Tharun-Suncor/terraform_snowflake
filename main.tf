@@ -23,7 +23,7 @@ provider "snowflake" {
 module "snowflake_warehouse" {
   source = "./modules/snowflake_warehouse"
 
-  name                 = "my_warehouse"
+  name                 = "my_warehouse33"
   comment              = "This is my warehouse"
   size                 = "X-SMALL"
   auto_suspend         = 60
