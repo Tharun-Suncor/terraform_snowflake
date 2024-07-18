@@ -12,7 +12,6 @@ provider "snowflake" {
   account     = var.snowflake_account
   role        = var.snowflake_role
   password    = var.snowflake_password
-  region      = var.snowflake_region
 }
 
 
