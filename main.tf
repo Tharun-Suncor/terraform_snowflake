@@ -7,6 +7,11 @@ terraform {
   }
 }
 
+terraform {
+  backend "local" {
+    path = "/terraform.tfstate"
+  }
+}
 provider "snowflake" {
   account     = var.snowflake_account
   username    = var.snowflake_username
