@@ -25,3 +25,14 @@ module "snowflake_warehouse" {
   auto_resume          = true
   initially_suspended  = true
 }
+
+module "snowflake_warehouse_2" {
+  source = "./modules/snowflake-warehouse"
+
+  name                 = "my_warehouse_2"
+  comment              = "This is my second warehouse"
+  size                 = "MEDIUM"
+  auto_suspend         = 120
+  auto_resume          = true
+  initially_suspended  = false
+}
