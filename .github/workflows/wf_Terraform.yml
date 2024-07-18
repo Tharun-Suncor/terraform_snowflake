@@ -8,12 +8,11 @@ jobs:
   terraform:
     name: 'Terraform Plan'
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: modules/snowflake_warehouse
     env:
       TF_VAR_snowflake_account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
       TF_VAR_snowflake_password: ${{ secrets.SNOWFLAKE_PASSWORD }}
+      TF_VAR_snowflake_username: ${{ secrets.SNOWFLAKE_USERNAME }}
+      TF_VAR_snowflake_role: ${{ secrets.SNOWFLAKE_ROLE }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
