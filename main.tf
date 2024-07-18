@@ -27,7 +27,7 @@ module "snowflake_warehouse" {
 }
 
 module "snowflake_warehouse_2" {
-  source = "./modules/snowflake-warehouse"
+  source = "./modules/snowflake_warehouse"
 
   name                 = "my_warehouse_2"
   comment              = "This is my second warehouse"
