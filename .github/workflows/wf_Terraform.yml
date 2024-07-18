@@ -31,18 +31,21 @@ jobs:
       #   run: terraform fmt -check
       - name: Terraform Format Check
         run: |
-          # Check for any unformatted files
-          UNFORMATTED_FILES=$(terraform fmt -check -list=true)
-          # Check the exit code of terraform fmt
-          if [ $? -eq 3 ]; then
+          # Run terraform fmt -check and capture output
+          OUTPUT=$(terraform fmt -check -list=true)
+          EXIT_CODE=$?
+          if [ $EXIT_CODE -eq 3 ]; then
             echo "The following files need formatting:"
-            # List the files that are not formatted
-            echo "$UNFORMATTED_FILES"
-            # Exit with a non-zero status to fail the step
+            echo "$OUTPUT"
+            # Fail the step to stop the workflow and highlight the issue
             exit 1
+          elif [ $EXIT_CODE -ne 0 ]; then
+            echo "An unexpected error occurred during formatting check."
+            exit $EXIT_CODE
           else
             echo "All Terraform files are properly formatted."
           fi
+
 
 
       - name: Terraform Validate
