@@ -16,7 +16,7 @@ provider "snowflake" {
 
 
 module "snowflake_warehouse" {
-  source = "./modules/snowflake-warehouse"
+  source = "./modules/snowflake_warehouse"
 
   name                 = "my_warehouse"
   comment              = "This is my warehouse"
