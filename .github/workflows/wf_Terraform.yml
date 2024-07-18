@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: terraform/snowflake
+        working-directory: modules/snowflake-warehouse
     env:
       TF_VAR_snowflake_account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
       TF_VAR_snowflake_password: ${{ secrets.SNOWFLAKE_PASSWORD }}
