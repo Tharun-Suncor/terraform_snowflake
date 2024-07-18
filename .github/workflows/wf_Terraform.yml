@@ -29,9 +29,12 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
+      # - name: Terraform Plan
+      #   id: plan
+      #   run: terraform plan -refresh-only
       - name: Terraform Plan
         id: plan
-        run: terraform plan -refresh-only
+        run: terraform plan -out=plan.out
 
       - name: Terraform Apply
         run: terraform apply -auto-approve plan.out
