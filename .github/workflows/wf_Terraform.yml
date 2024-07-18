@@ -1,0 +1,46 @@
+name: wf_Terraform
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: '1.1.0'
+
+    - name: Terraform Format Check
+      run: terraform fmt -check
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Validate
+      run: terraform validate
+
+    - name: Terraform Plan
+      run: terraform plan
+      env:
+        TF_VAR_snowflake_username: ${{ secrets.SNOWFLAKE_USERNAME }}
+        TF_VAR_snowflake_password: ${{ secrets.SNOWFLAKE_PASSWORD }}
+        TF_VAR_snowflake_account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+        TF_VAR_snowflake_role: ${{ secrets.SNOWFLAKE_ROLE }}
+
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main'
+      run: terraform apply -auto-approve
+      env:
+        TF_VAR_snowflake_username: ${{ secrets.SNOWFLAKE_USERNAME }}
+        TF_VAR_snowflake_password: ${{ secrets.SNOWFLAKE_PASSWORD }}
+        TF_VAR_snowflake_account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+        TF_VAR_snowflake_role: ${{ secrets.SNOWFLAKE_ROLE }}
