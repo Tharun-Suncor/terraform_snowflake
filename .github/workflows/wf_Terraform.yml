@@ -39,8 +39,8 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve plan.out
 
-      # - name: Upload Terraform State
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: terraform-state
-      #     path: terraform.tfstate
+      - name: Upload Terraform State
+        uses: actions/upload-artifact@v2
+        with:
+          name: terraform-state
+          path: terraform.tfstate
