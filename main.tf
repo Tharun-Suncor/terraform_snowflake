@@ -9,11 +9,9 @@ terraform {
       version = "~> 3.0"
     }
   }
-
-  backend "azurerm" {
-    # Empty - All sensitive values are provided at runtime
-  }
 }
+
+
 
 provider "azurerm" {
   features {}
