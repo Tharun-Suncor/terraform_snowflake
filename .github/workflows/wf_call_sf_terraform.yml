@@ -3,11 +3,7 @@ name: wf_call_sf_terraform
 on:
   push:
     branches:
-      - dev
-      - qut  
       - main
-    paths-ignore:
-      - '.github/**'
   workflow_dispatch: 
 
 jobs:
