@@ -11,10 +11,7 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "rg_sf_terraform_backend"
-    storage_account_name = "saterraformbackend22"
-    container_name       = "terrafornstate"
-    key                  = "terraform.tfstate"
+    # Empty - All sensitive values are provided at runtime
   }
 }
 
