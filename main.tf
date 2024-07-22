@@ -35,7 +35,7 @@ module "snowflake_warehouse" {
 
   name                                  = "my_warehouse"
   comment                               = "This is my warehouse"
-  size                                  = "Medium"
+  size                                  = "MEDIUM"
   auto_suspend                          = 60
   auto_resume                           = true
   initially_suspended                   = true
