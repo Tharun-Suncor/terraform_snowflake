@@ -29,6 +29,7 @@ provider "snowflake" {
   role        = var.snowflake_role
 }
 
+# Snowflake warehouse
 
 module "snowflake_warehouse" {
   source = "./modules/snowflake_warehouse"
@@ -41,3 +42,10 @@ module "snowflake_warehouse" {
   initially_suspended  = true
 }
 
+# Snowflake database
+
+module "snowflake_database" {
+  source = "./modules/snowflake_database"
+  name                 = "my_database"
+  comment              = "Sample database"
+}
