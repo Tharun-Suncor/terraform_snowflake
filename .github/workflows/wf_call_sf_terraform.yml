@@ -3,7 +3,7 @@ name: wf_call_sf_terraform
 on:
   push:
     branches:
-      - main
+      - mainn
   workflow_dispatch: 
 
 jobs:
