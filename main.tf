@@ -29,7 +29,6 @@ provider "snowflake" {
   role        = var.snowflake_role
 }
 
-# Snowflake warehouse
 
 module "snowflake_warehouse" {
   source = "./modules/snowflake_warehouse"
@@ -41,6 +40,7 @@ module "snowflake_warehouse" {
   auto_resume          = true
   initially_suspended  = true
 }
+
 
 # Snowflake database
 
