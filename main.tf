@@ -53,6 +53,7 @@ module "snowflake_database" {
   source = "./modules/snowflake_database"
 
   name                        = "my_database"
+  is_transient                = false
   comment                     = "This is my database"
   data_retention_time_in_days = 1
 }

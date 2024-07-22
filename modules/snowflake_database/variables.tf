@@ -14,3 +14,9 @@ variable "data_retention_time_in_days" {
   type        = number
   default     = 1
 }
+
+variable "is_transient" {
+  description = "Whether the Snowflake database is transient."
+  type        = bool
+  default     = false
+}
