@@ -40,7 +40,7 @@ module "snowflake_warehouse" {
   auto_resume                           = true
   initially_suspended                   = true
   enable_query_acceleration             = false
-  query_acceleration_max_scale_factor   = 8
+  query_acceleration_max_scale_factor   = null
   warehouse_type                        = "STANDARD"
   max_concurrency_level                 = 8
   statement_queued_timeout_in_seconds   = 0
