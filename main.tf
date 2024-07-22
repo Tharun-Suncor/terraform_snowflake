@@ -2,7 +2,7 @@ terraform {
   required_providers {
     snowflake = {
       source  = "Snowflake-Labs/snowflake"
-      version = "~> 0.63"
+      version = "0.63.0"
     }
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -24,7 +24,7 @@ provider "azurerm" {
 
 provider "snowflake" {
   account     = var.snowflake_account
-  user        = var.snowflake_username
+  username    = var.snowflake_username
   password    = var.snowflake_password
   role        = var.snowflake_role
 }
@@ -40,3 +40,4 @@ module "snowflake_warehouse" {
   auto_resume          = true
   initially_suspended  = true
 }
+
