@@ -45,6 +45,8 @@ variable "query_acceleration_max_scale_factor" {
   default     = 8
 }
 
+
+
 variable "warehouse_type" {
   description = "The type of the Snowflake warehouse (STANDARD | VIRTUAL)."
   type        = string
