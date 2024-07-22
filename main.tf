@@ -2,7 +2,7 @@ terraform {
   required_providers {
     snowflake = {
       source  = "Snowflake-Labs/snowflake"
-      version = "0.63.0"
+      version = "~> 0.61"
     }
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -39,14 +39,4 @@ module "snowflake_warehouse" {
   auto_suspend         = 60
   auto_resume          = true
   initially_suspended  = true
-}
-
-
-# Snowflake database
-
-module "snowflake_database" {
-  source = "./modules/snowflake_database"
-
-  name    = "my_database"
-  comment = "This is my database"
 }
