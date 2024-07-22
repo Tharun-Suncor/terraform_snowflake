@@ -58,3 +58,10 @@ module "snowflake_database" {
   data_retention_time_in_days = 1
 }
 
+
+module "snowflake_role" {
+  source = "./modules/snowflake_role"
+
+  name                        = "role_1"
+  comment                     = "Sample role"
+}
