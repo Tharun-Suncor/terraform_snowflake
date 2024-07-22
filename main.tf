@@ -33,11 +33,18 @@ provider "snowflake" {
 module "snowflake_warehouse" {
   source = "./modules/snowflake_warehouse"
 
-  name                 = "my_warehouse"
-  comment              = "This is my warehouse"
-  size                 = "X-SMALL"
-  auto_suspend         = 60
-  auto_resume          = true
-  initially_suspended  = true
+  name                                  = "my_warehouse"
+  comment                               = "This is my warehouse"
+  size                                  = "X-SMALL"
+  auto_suspend                          = 60
+  auto_resume                           = true
+  initially_suspended                   = true
+  enable_query_acceleration             = false
+  query_acceleration_max_scale_factor   = 8
+  warehouse_type                        = "STANDARD"
+  max_concurrency_level                 = 8
+  statement_queued_timeout_in_seconds   = 0
+  statement_timeout_in_seconds          = 172800
 }
+
 
