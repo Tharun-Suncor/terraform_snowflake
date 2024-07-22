@@ -15,3 +15,4 @@ resource "snowflake_database" "database" {
 
 
 
+

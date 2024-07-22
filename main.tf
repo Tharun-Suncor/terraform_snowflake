@@ -46,6 +46,7 @@ module "snowflake_warehouse" {
 
 module "snowflake_database" {
   source = "./modules/snowflake_database"
-  name                 = "my_database"
-  comment              = "Sample database"
+
+  name    = "my_database"
+  comment = "This is my database"
 }
