@@ -6,5 +6,11 @@ variable "name" {
 variable "comment" {
   description = "A comment for the Snowflake database."
   type        = string
-  default     = null
+  default     = ""
+}
+
+variable "data_retention_time_in_days" {
+  description = "The number of days for which historical data is retained."
+  type        = number
+  default     = 1
 }

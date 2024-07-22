@@ -49,4 +49,11 @@ module "snowflake_warehouse" {
 
 
 
+module "snowflake_database" {
+  source = "./modules/snowflake_database"
+
+  name                        = "my_database"
+  comment                     = "This is my database"
+  data_retention_time_in_days = 1
+}
 
