@@ -84,8 +84,4 @@ module "snowflake_user" {
   email                 = "user@example.com"
   first_name            = "First"
   last_name             = "Last"
-  mins_to_unlock        = 0
-  mins_to_bypass_mfa    = 0
-  days_to_expiry        = 0
-  network_policy        = null
-}
+  }
