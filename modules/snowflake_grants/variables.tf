@@ -1,10 +1,9 @@
 variable "role_name" {
-  description = "The name of the role to be granted."
+  description = "The name of the role"
   type        = string
 }
 
 variable "user_name" {
-  description = "The name of the user to which the role will be granted."
+  description = "The name of the user"
   type        = string
-  sensitive   = true
 }
