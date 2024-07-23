@@ -21,5 +21,5 @@ resource "snowflake_user" "user_" {
 # Grant the role to the specified user.
 resource "snowflake_grant_account_role" "grant_to_user" {
   role_name = snowflake_role.role.name
-  user_name = snowflake_user.user.name
+  user_name = snowflake_user.user_.name
 }
