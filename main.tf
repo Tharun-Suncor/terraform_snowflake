@@ -92,7 +92,7 @@ module "snowflake_grant_account_role" {
   user_name        = "my_user"
 }
 
-module "snowflake_grant_account_role" {
+module "snowflake_grant_account_role_2" {
   source           = "./modules/snowflake_grants"
   
   role_name        = "role_1"
