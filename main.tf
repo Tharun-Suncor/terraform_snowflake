@@ -85,8 +85,3 @@ module "snowflake_user" {
   default_secondary_roles = null
 }
 
-module "snowflake_grant_account_role" {
-  source           = "./modules/snowflake_grants"
-  role_name        = "role_1"
-  user_name        = "Tharunsnow"
-}
