@@ -12,3 +12,9 @@ resource "snowflake_grant_account_role" "grant_to_user" {
   role_name = var.role_name
   user_name = var.user_name
 }
+
+# Grant the role to the another role.
+resource "snowflake_grant_account_role" "grant_to_role" {
+  role_name = var.role_name
+  parent_role_name = var.parent_role_name
+}
