@@ -88,5 +88,5 @@ module "snowflake_user" {
 module "snowflake_grant_account_role" {
   source           = "./modules/snowflake_grants"
   role_name        = "role_1"
-  user_name        = "my_user"
+  user_name        = "Tharunsnow"
 }
