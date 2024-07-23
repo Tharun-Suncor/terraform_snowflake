@@ -23,10 +23,10 @@ resource "snowflake_user" "user" {
 }
 
 # Grant the role to the parent role to establish a parent-child role hierarchy.
-resource "snowflake_grant_account_role" "grant_to_role" {
-  role_name        = snowflake_role.role.name
-  parent_role_name = snowflake_role.parent_role.name
-}
+#resource "snowflake_grant_account_role" "grant_to_role" {
+#  role_name        = snowflake_role.role.name
+#  parent_role_name = snowflake_role.parent_role.name
+#}
 
 # Grant the role to the specified user.
 resource "snowflake_grant_account_role" "grant_to_user" {
