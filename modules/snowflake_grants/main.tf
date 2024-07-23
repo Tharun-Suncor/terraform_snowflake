@@ -13,7 +13,7 @@ resource "snowflake_role" "role" {
 }
 
 # Define the user to whom the role will be granted.
-resource "snowflake_user" "user" {
+resource "snowflake_user" "user_" {
   name = var.user_name
 }
 
