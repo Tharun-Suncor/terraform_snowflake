@@ -67,7 +67,7 @@ module "snowflake_role" {
 }
 
 module "snowflake_user" {
-  source = "./modules/snowflake-user"
+  source = "./modules/snowflake_user"
 
   name                  = "my_user"
   comment               = "This is my user"
