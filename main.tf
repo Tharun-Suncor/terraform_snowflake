@@ -82,6 +82,6 @@ module "snowflake_user" {
   email                   = "user@example.com"
   first_name              = "First"
   last_name               = "Last"
-  default_secondary_roles = null
+  default_secondary_roles = ["ALL"]
 }
 
