@@ -79,7 +79,6 @@ module "snowflake_user" {
   rsa_public_key_2        = null
   must_change_password    = false
   password                = "my_password"
-  login_name              = "my_login"
   email                   = "user@example.com"
   first_name              = "First"
   last_name               = "Last"
