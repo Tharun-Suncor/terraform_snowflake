@@ -83,6 +83,6 @@ variable "last_name" {
 
 variable "default_secondary_roles" {
   description = "Default secondary roles for the user."
-  type        = list(string)
-  default     = []
+  type        = string
+  default     = null
 }
