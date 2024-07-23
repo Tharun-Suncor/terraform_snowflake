@@ -65,3 +65,27 @@ module "snowflake_role" {
   name                        = "role_1"
   comment                     = "Sample role"
 }
+
+module "snowflake_user" {
+  source = "./modules/snowflake-user"
+
+  name                  = "my_user"
+  comment               = "This is my user"
+  disabled              = false
+  default_warehouse     = "my_warehouse"
+  default_namespace     = "my_namespace"
+  default_role          = "my_role"
+  rsa_public_key        = null
+  rsa_public_key_2      = null
+  must_change_password  = false
+  password              = "my_password"
+  login_name            = "my_login"
+  display_name          = "My User"
+  email                 = "user@example.com"
+  first_name            = "First"
+  last_name             = "Last"
+  mins_to_unlock        = 0
+  mins_to_bypass_mfa    = 0
+  days_to_expiry        = 0
+  network_policy        = null
+}
