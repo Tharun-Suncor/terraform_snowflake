@@ -95,6 +95,7 @@ module "snowflake_grant_account_role" {
 module "snowflake_schema" {
   source           = "./modules/snowflake_schema"
   
-  database        = "my_database"
-  name            = "sample_schema"
+  database_name    = "my_database"
+  schema_name      = "sample_schema"
+  schema_comment   = "This is a sample schema for demonstration purposes."
 }
