@@ -98,7 +98,7 @@ module "snowflake_schema" {
   database_name    = "my_database"
   schema_name      = "sample_schema"
   schema_comment   = "This is a sample schema for demonstration purposes."
-  data_retention_days = 0
+  data_retention_days = -1
   is_managed = false
   is_transient = false
 }
