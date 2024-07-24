@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.0.11
 
@@ -40,6 +40,8 @@ jobs:
           git add .terraform.lock.hcl
           git commit -m "Update Terraform lockfile" || echo "No changes to commit"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Terraform Validate
         run: terraform validate
