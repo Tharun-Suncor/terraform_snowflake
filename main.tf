@@ -92,3 +92,9 @@ module "snowflake_grant_account_role" {
   user_name        = "my_user"
 }
 
+module "snowflake_schema" {
+  source           = "./modules/snowflake_schema
+  
+  database        = "my_database"
+  name            = "sample_schema"
+}

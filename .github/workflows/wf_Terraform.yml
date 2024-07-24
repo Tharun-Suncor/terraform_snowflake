@@ -33,16 +33,6 @@ jobs:
         id: init
         run: terraform init
 
-      - name: Commit Terraform Lockfile
-        run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-          git add .terraform.lock.hcl
-          git commit -m "Update Terraform lockfile" || echo "No changes to commit"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Terraform Validate
         run: terraform validate
 
