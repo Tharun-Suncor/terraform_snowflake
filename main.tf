@@ -27,7 +27,7 @@ provider "azurerm" {
 }
 
 provider "snowflake" {
-  account     = var.snowflake_account
+  account     = "cj74128.west-us-2.azure" #var.snowflake_account
   user        = var.snowflake_username
   password    = var.snowflake_password
   role        = var.snowflake_role
