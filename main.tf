@@ -124,9 +124,9 @@ delete {
 }
 resource "snowsql_exec" "db" {
 create {
-#File Format
+    #File Format
     statements           = <<-EOT
-    #alter user tharunsnow set default_warehouse = 'my_warehouse';
+    --alter user tharunsnow set default_warehouse = 'my_warehouse';
     GRANT OWNERSHIP ON ROLE tharunsnow TO ROLE ACCOUNTADMIN;
     GRANT USAGE ON WAREHOUSE my_warehouse TO ROLE tharunsnow;
     use warehouse my_warehouse;USE ROLE ACCOUNTADMIN;use database my_database;use schema sample_schema;
