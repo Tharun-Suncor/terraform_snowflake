@@ -115,7 +115,10 @@ module "snowflake_schema" {
 resource "snowsql_exec" "set_default_warehouse" {
 create{
 statements = "USE ROLE ACCOUNTADMIN;use DB_DG;use schema SCH_DG;CREATE table testtable(col varchar(20));"
-} 
+}
+delete {
+    statements = "select 1;"
+  }
 }
 /*resource "snowsql_exec" "db" {
 create {
