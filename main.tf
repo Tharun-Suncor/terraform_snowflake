@@ -48,7 +48,7 @@ module "snowflake_warehouse" {
   size                                  = "LARGE"
   auto_suspend                          = 60
   auto_resume                           = true
-  initially_suspended                   = true
+  initially_suspended                   = false
   enable_query_acceleration             = false
   query_acceleration_max_scale_factor   = null
   warehouse_type                        = "STANDARD"
