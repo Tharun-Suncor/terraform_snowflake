@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # Snowflake Variables
-      TF_VAR_snowflake_account: ${{ vars.SNOWFLAKE_ACCOUNT }} #${{ secrets.SNOWFLAKE_ACCOUNT }}
+      TF_VAR_snowflake_account: "cj74128.west-us-2.azure" #${{ vars.SNOWFLAKE_ACCOUNT }} #${{ secrets.SNOWFLAKE_ACCOUNT }}
       TF_VAR_snowflake_password: ${{ secrets.SNOWFLAKE_PASSWORD }}
       TF_VAR_snowflake_username: ${{ secrets.SNOWFLAKE_USERNAME }}
       TF_VAR_snowflake_role: ${{ secrets.SNOWFLAKE_ROLE }}
