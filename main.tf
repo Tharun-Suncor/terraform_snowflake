@@ -113,9 +113,10 @@ module "snowflake_schema" {
   is_transient = false
 }
 resource "snowsql_exec" "set_default_warehouse" {
+create{
 statements = "USE ROLE ACCOUNTADMIN;use DB_DG;use schema SCH_DG;CREATE table testtable(col varchar(20));"
 } 
-
+}
 /*resource "snowsql_exec" "db" {
 create {
     #File Format
