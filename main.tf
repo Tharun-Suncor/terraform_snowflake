@@ -122,6 +122,7 @@ delete {
     statements = "select 1;"
   }
 }
+
 /*resource "snowsql_exec" "db" {
 create {
     #File Format
@@ -137,7 +138,7 @@ EOT
 delete {
     statements = "select 1;"
   } 
-/*depends_on = [
+depends_on = [
     snowsql_exec.set_admin_default_warehouse
-  ]*/
+  ]
 } */
