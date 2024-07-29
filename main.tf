@@ -8,6 +8,10 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~> 3.0"
     }
+    snowsql = {
+          source  = "aidanmelen/snowsql"
+          version = ">= 0.1.0"  
+        }
   }
 
   backend "azurerm" {
@@ -101,4 +105,12 @@ module "snowflake_schema" {
   data_retention_days = -1
   is_managed = false
   is_transient = false
+}
+resource "snowsql_exec" "db" {
+create {
+#File Format
+    statements           = <<-EOT
+    USE ROLE ACCOUNTADMIN;use my_database;use schema sample_schema;
+    create file format PARQUET_FORMAT
+    type = PARQUET;
 }
