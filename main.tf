@@ -112,11 +112,21 @@ module "snowflake_schema" {
   is_managed = false
   is_transient = false
 }
+resource "snowsql_exec" "set_admin_default_warehouse" {
+create {
+    statements           = <<-EOT
+    alter user tharunsnow set default_warehouse = 'my_warehouse';
+    EOT
+}
+delete {
+    statements = "select 1;"
+  }
+}
 resource "snowsql_exec" "db" {
 create {
 #File Format
     statements           = <<-EOT
-    alter user tharunsnow set default_warehouse = 'my_warehouse';
+    #alter user tharunsnow set default_warehouse = 'my_warehouse';
     GRANT OWNERSHIP ON ROLE tharunsnow TO ROLE ACCOUNTADMIN;
     GRANT USAGE ON WAREHOUSE my_warehouse TO ROLE tharunsnow;
     use warehouse my_warehouse;USE ROLE ACCOUNTADMIN;use database my_database;use schema sample_schema;
@@ -127,4 +137,7 @@ EOT
 delete {
     statements = "select 1;"
   }
+depends_on = [
+    snowsql_exec.set_admin_default_warehouse
+  ]
 } 
