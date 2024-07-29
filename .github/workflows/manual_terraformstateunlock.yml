@@ -1,0 +1,21 @@
+name: Manual Terraform Unlock
+on:
+  workflow_dispatch:
+
+jobs:
+  unlock:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.6
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Force Unlock Terraform State
+        run: terraform force-unlock 46c89bc0-bac7-31e7-66af-d5c1e0862294
