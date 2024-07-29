@@ -116,7 +116,7 @@ resource "snowsql_exec" "db" {
 create {
 #File Format
     statements           = <<-EOT
-    use warehouse snowflake_warehouse;USE ROLE ACCOUNTADMIN;use my_database;use schema sample_schema;
+    use warehouse my_warehouse;USE ROLE ACCOUNTADMIN;use my_database;use schema sample_schema;
     create file format PARQUET_FORMAT
     type = PARQUET;
 EOT
