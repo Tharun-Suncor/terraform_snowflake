@@ -16,6 +16,11 @@ jobs:
 
       - name: Initialize Terraform
         run: terraform init
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
       - name: Force Unlock Terraform State
         run: terraform force-unlock 46c89bc0-bac7-31e7-66af-d5c1e0862294
