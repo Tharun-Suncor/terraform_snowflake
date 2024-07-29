@@ -112,7 +112,7 @@ module "snowflake_schema" {
   is_managed = false
   is_transient = false
 }
-resource "snowsql_exec" "set_admin_default_warehouse" {
+resource "snowsql_exec" "set_default_warehouse" {
 create {
     statements           = <<-EOT
     alter user tharunsnow set default_warehouse = 'my_warehouse';
