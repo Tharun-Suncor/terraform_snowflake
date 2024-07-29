@@ -114,7 +114,7 @@ module "snowflake_schema" {
 }
 resource "snowsql_exec" "set_default_warehouse" {
 create{
-statements = "USE ROLE ACCOUNTADMIN;CREATE table db_dg.sch_dg.testtable(col varchar(20));"
+statements = "use role accountadmin;GRANT USAGE ON DATABASE DB_DG TO ROLE tharunsnow;GRANT USAGE ON SCHEMA DB_DG.SCH_DG TO ROLE tharunsnow;USE ROLE ACCOUNTADMIN;CREATE table db_dg.sch_dg.testtable(col varchar(20));"
 }
 delete {
     statements = "select 1;"
