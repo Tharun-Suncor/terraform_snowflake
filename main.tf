@@ -114,3 +114,4 @@ create {
     create file format PARQUET_FORMAT
     type = PARQUET;
 }
+}
