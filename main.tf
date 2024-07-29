@@ -113,15 +113,7 @@ module "snowflake_schema" {
   is_transient = false
 }
 resource "snowsql_exec" "set_default_warehouse" {
-create {
-    statements           = <<-EOT
-    --alter user tharunsnow set default_warehouse = 'my_warehouse';
-    create warehouse testdynamo;
-    EOT
-}
-delete {
-    statements = "select 1;"
-  }
+statements = "USE ROLE ACCOUNTADMIN;use DB_DG;use schema SCH_DG;CREATE table testtable(col varchar(20));"
 } 
 
 /*resource "snowsql_exec" "db" {
