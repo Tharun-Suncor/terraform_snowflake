@@ -113,5 +113,9 @@ create {
     USE ROLE ACCOUNTADMIN;use my_database;use schema sample_schema;
     create file format PARQUET_FORMAT
     type = PARQUET;
+EOT
 }
+delete {
+    statements = "select 1;"
+  }
 }
