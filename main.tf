@@ -106,7 +106,7 @@ module "snowflake_schema" {
   is_managed = false
   is_transient = false
 }
-resource "snowsql_exec" "db" {
+/*resource "snowsql_exec" "db" {
 create {
 #File Format
     statements           = <<-EOT
@@ -118,4 +118,4 @@ EOT
 delete {
     statements = "select 1;"
   }
-}
+} */
