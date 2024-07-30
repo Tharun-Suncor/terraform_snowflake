@@ -116,35 +116,21 @@ module "snowflake_schema" {
   execute = "CREATE DATABASE if not exists ABC"
   revert = "select 1"
 }*/
-resource "snowsql_exec" "db" {
+resource "snowsql_exec" "role" {
+  create {
+    statements = "CREATE ROLE my_role"
+  }
 
-create {
-statements           = <<-EOT
-CREATE DATABASE if not exists ABCvaisakh;
-CREATE ROLE IF NOT EXISTS DE_ROLE;
-CREATE ROLE IF NOT EXISTS DA_ROLE;
-EOT
+  read {
+    statements = "SHOW ROLES LIKE 'my_role'"
+  }
+
+  # uncomment to update role in-place
+  # update {
+  #   statements = "ALTER ROLE my_role SET COMMENT = 'updated with terraform'"
+  # }
+
+  delete {
+    statements = "select 1"
+  }
 }
-delete {
- statements = "select 1;"
-}
-}
-/*resource "snowsql_exec" "db" {
-create {
-    #File Format
-    statements           = <<-EOT
-    --alter user tharunsnow set default_warehouse = 'my_warehouse';
-    GRANT OWNERSHIP ON ROLE tharunsnow TO ROLE ACCOUNTADMIN;
-    GRANT USAGE ON WAREHOUSE my_warehouse TO ROLE tharunsnow;
-    use warehouse my_warehouse;USE ROLE ACCOUNTADMIN;use database my_database;use schema sample_schema;
-    create file format PARQUET_FORMAT
-    type = PARQUET;
-EOT
-}
-delete {
-    statements = "select 1;"
-  } 
-depends_on = [
-    snowsql_exec.set_admin_default_warehouse
-  ]
-} */
