@@ -112,18 +112,8 @@ module "snowflake_schema" {
   is_managed = false
   is_transient = false
 }
-resource "snowsql_exec" "set_default_warehouse" {
-create{
-statements           = <<-EOT
-    USE ROLE ACCOUNTADMIN;use my_database;use schema my_schema;
-    create file format PARQUET_FORMAT
-    type = PARQUET;
-EOT 
-}
-delete {
-    statements = "select 1;"
-    number_of_statements = "1"
-  }
+resource "snowflake_unsafe_execute" "test" {
+  execute = "CREATE DATABASE ABC"
 }
 /*resource "snowsql_exec" "db" {
 create {
