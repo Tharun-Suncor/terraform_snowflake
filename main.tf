@@ -118,7 +118,7 @@ module "snowflake_schema" {
 }*/
 resource "snowsql_exec" "role" {
   create {
-    statements = "CREATE ROLE my_role"
+    statements = "CREATE ROLE da_role"
   }
 
   delete {
