@@ -120,7 +120,9 @@ resource "snowsql_exec" "db" {
 
 create {
 statements           = <<-EOT
-CREATE DATABASE if not exists ABCvaisakh
+CREATE DATABASE if not exists ABCvaisakh;
+CREATE ROLE IF NOT EXISTS DE_ROLE;
+CREATE ROLE IF NOT EXISTS DA_ROLE;
 EOT
 }
 delete {
