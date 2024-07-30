@@ -113,7 +113,7 @@ module "snowflake_schema" {
   is_transient = false
 }
 resource "snowflake_unsafe_execute" "test1" {
-  execute = "CREATE DATABASE if not exits ABC"
+  execute = "CREATE DATABASE if not exists ABC"
   revert = "select 1"
 }
 /*resource "snowsql_exec" "db" {
