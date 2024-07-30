@@ -118,7 +118,7 @@ module "snowflake_schema" {
 }*/
 resource "snowsql_exec" "role" {
   create {
-    statements = "CREATE ROLE da_role"
+    statements = "CREATE ROLE if not exists vaisakh_role"
   }
 
   delete {
