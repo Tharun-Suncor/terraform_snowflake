@@ -114,10 +114,11 @@ module "snowflake_schema" {
 }
 resource "snowsql_exec" "set_default_warehouse" {
 create{
-statements = <<-EOT 
-use role accountadmin;
-CREATE ROLE IF NOT EXISTS DA_ROLE;
-EOT
+statements           = <<-EOT
+    USE ROLE ACCOUNTADMIN;use DB_DG;use schema SCH_DG;
+    create file format PARQUET_FORMAT
+    type = PARQUET;
+EOT 
 }
 delete {
     statements = "select 1;"
