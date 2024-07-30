@@ -114,6 +114,7 @@ module "snowflake_schema" {
 }
 resource "snowflake_unsafe_execute" "test" {
   execute = "CREATE DATABASE ABC"
+  execute = "select 1"
 }
 /*resource "snowsql_exec" "db" {
 create {
