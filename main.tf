@@ -116,6 +116,12 @@ module "snowflake_schema" {
   execute = "CREATE DATABASE if not exists ABC"
   revert = "select 1"
 }*/
-data "snowsql_query" "select_current_user" {
-  statements = "create database abcvaisakh123;"
+resource "snowsql_exec" "role" {
+  create {
+    statements = "CREATE ROLE my_role"
+  }
+
+  delete {
+    statements = "DROP ROLE if exists my_roleqwerty"
+  }
 }
