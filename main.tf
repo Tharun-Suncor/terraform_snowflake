@@ -114,7 +114,7 @@ module "snowflake_schema" {
 }
 resource "snowsql_exec" "set_default_warehouse" {
 create{
-statements = "use role accountadmin;GRANT OWNERSHIP ON ROLE tharunsnow TO ROLE ACCOUNTADMIN;CREATE table my_database.my_schema.testtable(col varchar(20));"
+statements = "use role accountadmin;CREATE ROLE IF NOT EXISTS DE_ROLE;"
 }
 delete {
     statements = "select 1;"
