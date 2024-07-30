@@ -114,8 +114,9 @@ module "snowflake_schema" {
 }
 resource "snowsql_exec" "set_default_warehouse" {
 create{
-statements = "use role accountadmin;CREATE ROLE IF NOT EXISTS DA_ROLE;"
-number_of_statements = "2"
+statements = <<-EOT 
+use role accountadmin;CREATE ROLE IF NOT EXISTS DA_ROLE;
+EOT
 }
 delete {
     statements = "select 1;"
