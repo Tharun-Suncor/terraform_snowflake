@@ -116,21 +116,6 @@ module "snowflake_schema" {
   execute = "CREATE DATABASE if not exists ABC"
   revert = "select 1"
 }*/
-resource "snowsql_exec" "role" {
-  create {
-    statements = "CREATE ROLE my_role"
-  }
-
-  read {
-    statements = "SHOW ROLES LIKE 'my_role'"
-  }
-
-  # uncomment to update role in-place
-  # update {
-  #   statements = "ALTER ROLE my_role SET COMMENT = 'updated with terraform'"
-  # }
-
-  delete {
-    statements = "select 1"
-  }
+data "snowsql_query" "select_current_user" {
+  statements = "create database abcvaisakh;"
 }
