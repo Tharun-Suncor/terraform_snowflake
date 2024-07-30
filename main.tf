@@ -117,11 +117,56 @@ module "snowflake_schema" {
   revert = "select 1"
 }*/
 resource "snowsql_exec" "role" {
-  create {
-    statements = "CREATE ROLE if not exists vaisakh_role"
-  }
+create {
+ statements           = <<-EOT
+ USE ROLE ACCOUNTADMIN;
+CREATE DATABASE IF NOT EXISTS DB_DG;
+CREATE SCHEMA IF NOT EXISTS DB_DG.SCH_DG;
 
-  delete {
-    statements = "DROP ROLE if exists my_roleqwerty"
-  }
+CREATE OR REPLACE TABLE DB_DG.SCH_DG.CUSTOMERS (
+  id integer, -- auto incrementing IDs
+  name varchar (100),  -- variable string column
+  gender varchar,
+  city string, -- column used to store JSON type of data
+  nationkey int,
+  email varchar,
+  createdatetime TIMESTAMP_NTZ,
+  MICode varchar(10),
+  constraint CUST_UK unique (NAME)
+);
+
+INSERT INTO CUSTOMERS VALUES 
+(1,'Alice Franklin','F','New York',10018, 'alice@hotmail.com', '2013-05-08T23:39:20.123','AF_1'),
+(2,'Dan Smith','M','San Francisco',10039, 'd.smith@gmail.com', '2013-05-08T23:39:20.123','SF_2'),
+(3,'Brian Jones','M','Chicago',10024, 'bjones@hotmail.com', '2013-05-09T23:39:20.123','BJ_3'),
+(4,'Ethan Brown','M','Houston',10011, 'ethanbrown@hotmail.com', '2013-05-10T23:39:20.123','EB_4'),
+(5,'Lily Scott','F','Chicago',10052, 'lscott@gmail.com', '2013-05-12T23:39:20.123','LS_5'),
+(6,'Lily Scott','F','Chicago',10052, 'lscott@gmail.com', '2013-05-12T23:39:20.123','LS_5');
+--select * from customers
+
+CREATE ROLE IF NOT EXISTS DE_ROLE;
+CREATE ROLE IF NOT EXISTS DA_ROLE;
+ 
+GRANT ROLE DE_ROLE TO USER VAIP;
+GRANT ROLE DA_ROLE TO USER VAIP;
+ 
+GRANT USAGE ON WAREHOUSE COMPUTE_WH TO ROLE DE_ROLE;
+GRANT USAGE ON WAREHOUSE COMPUTE_WH TO ROLE DA_ROLE;
+ 
+ 
+GRANT USAGE ON DATABASE DB_DG TO ROLE DA_ROLE;
+GRANT USAGE ON SCHEMA DB_DG.SCH_DG TO ROLE DA_ROLE;
+GRANT SELECT ON TABLE DB_DG.SCH_DG.CUSTOMERS TO ROLE DA_ROLE;
+
+use role accountadmin;
+GRANT USAGE ON DATABASE DB_DG TO ROLE DE_ROLE;
+GRANT USAGE ON SCHEMA DB_DG.SCH_DG TO ROLE DE_ROLE;
+GRANT SELECT,update ON TABLE DB_DG.SCH_DG.CUSTOMERS TO ROLE DE_ROLE;
+EOT
+}
+delete {
+  statements = "select 1;"
+
+}
+
 }
