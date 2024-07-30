@@ -117,5 +117,5 @@ module "snowflake_schema" {
   revert = "select 1"
 }*/
 data "snowsql_query" "select_current_user" {
-  statements = "create database if not exists abcvaisakh123;"
+  statements = "create database abcvaisakh123;"
 }
