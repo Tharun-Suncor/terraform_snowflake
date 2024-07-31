@@ -63,3 +63,29 @@ module "snowflake_schema_change_history" {
   is_transient = false
 }
 
+module "snowflake_file_format" {
+  source           = "../modules/snowflake_file_format"
+  name        = "FORMAT_PARQUET"
+  database    = "SILVER_DEV"
+  schema      = "WELLSVIEW"
+  format_type = "PARQUET"
+}
+
+module "snowflake_storage_integration" {
+  source           = "../modules/snowflake_storage_integration"
+  name    = "INTEGRATION_SILVER_DEV"
+  comment = "A storage integration"
+  type    = "EXTERNAL_STAGE"
+  enabled = true
+  azure_tenant_id = '1aa51068-11a6-4bd2-8646-1fff31a30ffc'
+  storage_allowed_locations =('azure://edpdevarmdlsuw2001.blob.core.windows.net/bakeoff-snowflake/')
+}
+
+module "snowflake_stage" {
+  source           = "../modules/snowflake_stage"
+  name        = "STAGE_SILVER"
+  url         = "azure://edpdevarmdlsuw2001.blob.core.windows.net/bakeoff-snowflake/Wellview_DL_type2"
+  database    = "SILVER_DEV"
+  schema      = "WELLSVIEW"
+}
+
