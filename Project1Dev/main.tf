@@ -26,8 +26,8 @@ module "snowflake_database" {
 
 module "snowflake_schema" {
   source     = "../modules/snowflake_schema"
-  database   = "EDW"
-  schema     = "PROJECT1_DEV"
+  database   = "PROJECT1_DEV"
+  schema     = "EDW"
   comment   = "This is a schema"
   data_retention_days = -1
   is_managed = false
