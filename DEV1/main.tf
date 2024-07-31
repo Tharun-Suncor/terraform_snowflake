@@ -50,7 +50,7 @@ module "snowflake_schema" {
   is_managed = false
   is_transient = false
 }
-/*
+
 module "snowflake_schema_change_history" {
   source           = "../modules/snowflake_schema"
   database    = "SILVER_DEV"
@@ -84,5 +84,5 @@ module "snowflake_stage" {
   url         = "azure://edpdevarmdlsuw2001.blob.core.windows.net/bakeoff-snowflake/Wellview_DL_type2"
   database    = "SILVER_DEV"
   schema      = "WELLSVIEW"
-} */
+} 
 
