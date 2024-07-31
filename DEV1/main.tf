@@ -44,9 +44,9 @@ module "snowflake_database" {
 module "snowflake_schema" {
   source           = "../modules/snowflake_schema"
   
-  database_name    = "SILVER_DEV"
-  schema_name      = "WELLSVIEW"
-  schema_comment   = "This is a schema"
+  database    = "SILVER_DEV"
+  schema     = "WELLSVIEW"
+  comment   = "This is a schema"
   data_retention_days = -1
   is_managed = false
   is_transient = false
@@ -55,9 +55,9 @@ module "snowflake_schema" {
 module "snowflake_schema_change_history" {
   source           = "../modules/snowflake_schema"
   
-  database_name    = "SILVER_DEV"
-  schema_name      = "SCHEMACHANGE"
-  schema_comment   = "This is a schema to track change history"
+  database    = "SILVER_DEV"
+  schema      = "SCHEMACHANGE"
+  comment   = "This is a schema to track change history"
   data_retention_days = -1
   is_managed = false
   is_transient = false
