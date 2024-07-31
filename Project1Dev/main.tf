@@ -46,21 +46,21 @@ module "snowflake_schema_change_history" {
   is_transient = false
   depends_on = [module.snowflake_database]
 }
-module "snowflake_schema_change_history" {
+module "snowflake_schema_stage" {
   source           = "../modules/snowflake_schema"
   database    = "PROJECT1_DEV"
   schema      = "EDW_STAGE"
-  comment   = "This is a schema to track change history"
+  comment   = "This is a schema for stage"
   data_retention_days = -1
   is_managed = false
   is_transient = false
   depends_on = [module.snowflake_database]
 }
-module "snowflake_schema_change_history" {
+module "snowflake_schema_control_table_schema" {
   source           = "../modules/snowflake_schema"
   database    = "PROJECT1_DEV"
   schema      = "EDO"
-  comment   = "This is a schema to track change history"
+  comment   = "This is a schema control table"
   data_retention_days = -1
   is_managed = false
   is_transient = false
