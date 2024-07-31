@@ -64,7 +64,7 @@ module "snowflake_schema_change_history" {
 }
 
 module "snowflake_file_format" {
-  source           = "../modules/snowflake_file_format"
+  source           = "../modules/snowflake_format_parquet"
   name        = "FORMAT_PARQUET"
   database    = "SILVER_DEV"
   schema      = "WELLSVIEW"
@@ -72,7 +72,7 @@ module "snowflake_file_format" {
 }
 
 module "snowflake_storage_integration" {
-  source           = "../modules/snowflake_storage_integration"
+  source           = "../modules/snowflake_integration"
   name    = "INTEGRATION_SILVER_DEV"
   comment = "A storage integration"
   type    = "EXTERNAL_STAGE"
