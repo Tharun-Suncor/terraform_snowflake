@@ -14,6 +14,23 @@ provider "snowflake" {
   role        = var.snowflake_role
 }
 
+module "snowflake_warehouse" {
+  source = "../modules/snowflake_warehouse"
+
+  name                                  = "COMPUTE_WH_PROJECT1_QUT"
+  comment                               = "This is warehouse"
+  size                                  = "XSMALL"
+  auto_suspend                          = 60
+  auto_resume                           = true
+  initially_suspended                   = true
+  enable_query_acceleration             = false
+  query_acceleration_max_scale_factor   = null
+  warehouse_type                        = "STANDARD"
+  max_concurrency_level                 = 8
+  statement_queued_timeout_in_seconds   = 0
+  statement_timeout_in_seconds          = 172800
+}
+
 module "snowflake_database" {
   source = "../modules/snowflake_database"
 
