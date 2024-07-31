@@ -60,15 +60,15 @@ module "snowflake_schema" {
   is_managed = false
   is_transient = false
 }*/
-module "snowflake_file_format" {
-  source           = "../modules/snowflake_format_parquet"
+module "snowflake_format_parquet" {
+  source      = "../modules/snowflake_format_parquet"
   name        = "FORMAT_PARQUET"
   database    = "SILVER_DEV"
   schema      = "WELLSVIEW"
   format_type = "PARQUET"
 }
 
-module "snowflake_storage_integration" {
+module "snowflake_integration" {
   source           = "../modules/snowflake_integration"
   name    = "INTEGRATION_SILVER_DEV"
   type    = "EXTERNAL_STAGE"
