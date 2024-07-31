@@ -50,7 +50,7 @@ module "snowflake_schema" {
   data_retention_days = -1
   is_managed = false
   is_transient = false
-depends_on = ["module.snowflake_database"]
+depends_on = [module.snowflake_database]
 }
 
 
@@ -62,7 +62,7 @@ module "snowflake_schema_change_history" {
   data_retention_days = -1
   is_managed = false
   is_transient = false
-  depends_on = ["module.snowflake_database"]
+  depends_on = [module.snowflake_database]
 }
 module "snowflake_format_parquet" {
   source      = "../modules/snowflake_format_parquet"
@@ -70,6 +70,7 @@ module "snowflake_format_parquet" {
   database    = "SILVER_DEV"
   schema      = "WELLSVIEW"
   format_type = "PARQUET"
+depends_on = [module.snowflake_schema]
 }
 
 /*module "snowflake_integration" {
