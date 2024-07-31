@@ -73,7 +73,7 @@ module "snowflake_format_parquet" {
 depends_on = [module.snowflake_schema]
 }
 
-/*module "snowflake_integration" {
+module "snowflake_integration" {
   source           = "../modules/snowflake_integration"
   name    = "INTEGRATION_SILVER_DEV"
   type    = "EXTERNAL_STAGE"
@@ -89,5 +89,6 @@ module "snowflake_stage" {
   url         = "azure://edpdevarmdlsuw2001.blob.core.windows.net/bakeoff-snowflake/Wellview_DL_type2"
   database    = "SILVER_DEV"
   schema      = "WELLSVIEW"
-} */
+  depends_on = [module.snowflake_schema]
+} 
 
