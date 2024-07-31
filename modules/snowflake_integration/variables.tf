@@ -18,3 +18,7 @@ variable "storage_allowed_locations" {
   description = "Mention location"
   type        = string
 }
+variable "storage_provider" {
+  description = "Mention provider"
+  type        = string
+}
