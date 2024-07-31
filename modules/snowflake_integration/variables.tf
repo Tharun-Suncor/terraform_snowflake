@@ -8,7 +8,7 @@ variable "type" {
 }
 variable "enabled" {
   description = "should enabled or not"
-  type        = boolean
+  type        = bool
 }
 variable "azure_tenant_id" {
   description = "Mention azure tenant id"
