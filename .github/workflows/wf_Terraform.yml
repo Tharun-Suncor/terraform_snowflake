@@ -2,7 +2,7 @@ name: wf_Terraform
 on:
   push:
     branches:
-      - mainnn
+      - main
   workflow_dispatch:
 jobs:
   terraform:
@@ -22,7 +22,7 @@ jobs:
       ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
     defaults:
       run:
-        working-directory: "./DEV1/"
+        working-directory: "./QUT/"
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
