@@ -9,7 +9,6 @@ terraform {
 
 resource "snowflake_storage_integration" "integration" {
   name    = var.name
-  comment = var.comment
   type    = var.type
   enabled = var.enabled
   azure_tenant_id = var.azure_tenant_id
