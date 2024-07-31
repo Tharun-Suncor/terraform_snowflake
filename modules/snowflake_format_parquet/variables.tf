@@ -15,7 +15,7 @@ variable "schema" {
   default     = ""
 }
 
-variable "format_type " {
+variable "format_type" {
   description = "what would be the type for file"
   type        = string
   default     = "PARQUET"
