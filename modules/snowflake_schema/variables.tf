@@ -1,10 +1,10 @@
-variable "schema" {
-  description = "The name of the schema to create."
+variable "database" {
+  description = "The name of the database in which to create the schema."
   type        = string
 }
 
-variable "database" {
-  description = "The name of the database in which to create the schema."
+variable "schema" {
+  description = "The name of the schema to create."
   type        = string
 }
 
