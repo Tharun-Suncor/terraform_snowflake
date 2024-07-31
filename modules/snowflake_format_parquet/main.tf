@@ -8,8 +8,8 @@ terraform {
 }
 
 resource "snowflake_file_format" "file_format" {
-  name        = "FORMAT_PARQUET"
-  database    = "SILVER_DEV"
-  schema      = "WELLSVIEW"
-  format_type = "PARQUET"
+  name        = var.name
+  database    =  var.database
+  schema      =  var.schema
+  format_type =  var.format_type
 }
