@@ -45,7 +45,7 @@ module "snowflake_schema" {
   source           = "../modules/snowflake_schema"
   
   database_name    = "SILVER_DEV"
-  schema_name      = "WELLS_VIEW"
+  schema_name      = "WELLSVIEW"
   schema_comment   = "This is a schema"
   data_retention_days = -1
   is_managed = false
@@ -56,7 +56,7 @@ module "snowflake_schema_change_history" {
   source           = "../modules/snowflake_schema"
   
   database_name    = "SILVER_DEV"
-  schema_name      = "SCHEMA_CHANGE"
+  schema_name      = "SCHEMACHANGE"
   schema_comment   = "This is a schema to track change history"
   data_retention_days = -1
   is_managed = false
