@@ -60,7 +60,7 @@ module "snowflake_schema_change_history" {
   is_managed = false
   is_transient = false
 }
-module "snowflake_file_format" {
+/*module "snowflake_file_format" {
   source           = "../modules/snowflake_format_parquet"
   name        = "FORMAT_PARQUET"
   database    = "SILVER_DEV"
@@ -84,5 +84,5 @@ module "snowflake_stage" {
   url         = "azure://edpdevarmdlsuw2001.blob.core.windows.net/bakeoff-snowflake/Wellview_DL_type2"
   database    = "SILVER_DEV"
   schema      = "WELLSVIEW"
-} 
+} */
 
