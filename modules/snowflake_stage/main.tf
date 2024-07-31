@@ -8,8 +8,8 @@ terraform {
 }
 
 resource "snowflake_stage" "stage" {
-  name        = "STAGE_SILVER"
-  url         = "azure://edpdevarmdlsuw2001.blob.core.windows.net/bakeoff-snowflake/Wellview_DL_type2"
-  database    = "SILVER_DEV"
-  schema      = "WELLSVIEW"
+  name        = var.name
+  url         = var.url
+  database    = var.database
+  schema      = var.schema
 }
