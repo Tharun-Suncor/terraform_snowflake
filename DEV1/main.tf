@@ -41,6 +41,7 @@ module "snowflake_database" {
   data_retention_time_in_days = 1
 }
 
+
 module "snowflake_schema" {
   source     = "../modules/snowflake_schema"
   database   = "SILVER_DEV"
@@ -49,9 +50,11 @@ module "snowflake_schema" {
   data_retention_days = -1
   is_managed = false
   is_transient = false
+depends_on = ["module.snowflake_database"]
 }
 
-/*module "snowflake_schema_change_history" {
+
+module "snowflake_schema_change_history" {
   source           = "../modules/snowflake_schema"
   database    = "SILVER_DEV"
   schema      = "SCHEMACHANGE"
@@ -59,7 +62,8 @@ module "snowflake_schema" {
   data_retention_days = -1
   is_managed = false
   is_transient = false
-}*/
+  depends_on = ["module.snowflake_database"]
+}
 module "snowflake_format_parquet" {
   source      = "../modules/snowflake_format_parquet"
   name        = "FORMAT_PARQUET"
@@ -68,7 +72,7 @@ module "snowflake_format_parquet" {
   format_type = "PARQUET"
 }
 
-module "snowflake_integration" {
+/*module "snowflake_integration" {
   source           = "../modules/snowflake_integration"
   name    = "INTEGRATION_SILVER_DEV"
   type    = "EXTERNAL_STAGE"
@@ -84,5 +88,5 @@ module "snowflake_stage" {
   url         = "azure://edpdevarmdlsuw2001.blob.core.windows.net/bakeoff-snowflake/Wellview_DL_type2"
   database    = "SILVER_DEV"
   schema      = "WELLSVIEW"
-} 
+} */
 
