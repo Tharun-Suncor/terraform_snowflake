@@ -13,4 +13,5 @@ resource "snowflake_storage_integration" "integration" {
   enabled = var.enabled
   azure_tenant_id = var.azure_tenant_id
   storage_allowed_locations =var.storage_allowed_locations
+  storage_provider = var.storage_provider
 }
