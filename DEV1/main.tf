@@ -42,19 +42,17 @@ module "snowflake_database" {
 }
 
 module "snowflake_schema" {
-  source           = "../modules/snowflake_schema"
-  
-  database    = "SILVER_DEV"
+  source     = "../modules/snowflake_schema"
+  database   = "SILVER_DEV"
   schema     = "WELLSVIEW"
   comment   = "This is a schema"
   data_retention_days = -1
   is_managed = false
   is_transient = false
 }
-
+/*
 module "snowflake_schema_change_history" {
   source           = "../modules/snowflake_schema"
-  
   database    = "SILVER_DEV"
   schema      = "SCHEMACHANGE"
   comment   = "This is a schema to track change history"
@@ -62,7 +60,6 @@ module "snowflake_schema_change_history" {
   is_managed = false
   is_transient = false
 }
-/*
 module "snowflake_file_format" {
   source           = "../modules/snowflake_format_parquet"
   name        = "FORMAT_PARQUET"
