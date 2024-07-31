@@ -4,26 +4,7 @@ terraform {
       source  = "Snowflake-Labs/snowflake"
       version = "0.92.0"
     }
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 3.0"
-    }
-    snowsql = {
-          source  = "aidanmelen/snowsql"
-          version = ">= 1.3.3"  
-        }
   }
-
-  backend "azurerm" {
-    resource_group_name  = "rg_sf_terraform_backend"
-    storage_account_name = "saterraformbackend22"
-    container_name       = "terrafornstate"
-    key                  = "terraform.tfstate"
-  }
-}
-
-provider "azurerm" {
-  features {}
 }
 
 provider "snowflake" {
@@ -32,20 +13,12 @@ provider "snowflake" {
   password    = var.snowflake_password
   role        = var.snowflake_role
 }
-provider "snowsql" {
-  account     = var.snowflake_account
-  username        = var.snowflake_username
-  password    = var.snowflake_password
-  role        = var.snowflake_role
-}
-
-
 module "snowflake_warehouse" {
-  source = "./modules/snowflake_warehouse"
+  source = "../modules/snowflake_warehouse"
 
-  name                                  = "my_warehouse"
-  comment                               = "This is my warehouse"
-  size                                  = "LARGE"
+  name                                  = "COMPUTE_WH_QUT"
+  comment                               = "This is warehouse"
+  size                                  = "XSMALL"
   auto_suspend                          = 60
   auto_resume                           = true
   initially_suspended                   = true
@@ -60,113 +33,61 @@ module "snowflake_warehouse" {
 
 
 module "snowflake_database" {
-  source = "./modules/snowflake_database"
+  source = "../modules/snowflake_database"
 
-  name                        = "my_database"
+  name                        = "SILVER_QUT"
   is_transient                = false
-  comment                     = "This is my database"
+  comment                     = "This is database"
   data_retention_time_in_days = 1
 }
 
 
-module "snowflake_role" {
-  source = "./modules/snowflake_role"
-
-  name                        = "role_1"
-  comment                     = "Sample role"
-}
-
-module "snowflake_user" {
-  source = "./modules/snowflake_user"
-
-  name                    = "my_user"
-  comment                 = "sample user"
-  disabled                = false
-  default_warehouse       = "my_warehouse"
-  default_namespace       = ""
-  default_role            = "SYSADMIN"
-  rsa_public_key          = null
-  rsa_public_key_2        = null
-  must_change_password    = false
-  password                = "my_password"
-  email                   = "user@example.com"
-  first_name              = "First"
-  last_name               = "Last"
-  default_secondary_roles = ["ALL"]
-}
-
-module "snowflake_grant_account_role" {
-  source           = "./modules/snowflake_grants"
-  
-  role_name        = "role_1"
-  user_name        = "my_user"
-}
-
 module "snowflake_schema" {
-  source           = "./modules/snowflake_schema"
-  
-  database_name    = "my_database"
-  schema_name      = "sample_schema"
-  schema_comment   = "This is a sample schema for demonstration purposes."
+  source     = "../modules/snowflake_schema"
+  database   = "SILVER_QUT"
+  schema     = "WELLSVIEW"
+  comment   = "This is a schema"
   data_retention_days = -1
   is_managed = false
   is_transient = false
-}
-/*resource "snowflake_unsafe_execute" "test1" {
-  execute = "CREATE DATABASE if not exists ABC"
-  revert = "select 1"
-}*/
-resource "snowsql_exec" "role" {
-create {
- statements           = <<-EOT
- USE ROLE ACCOUNTADMIN;
-CREATE DATABASE IF NOT EXISTS DB_DG;
-CREATE SCHEMA IF NOT EXISTS DB_DG.SCH_DG;
-
-CREATE OR REPLACE TABLE DB_DG.SCH_DG.CUSTOMERS (
-  id integer, -- auto incrementing IDs
-  name varchar (100),  -- variable string column
-  gender varchar,
-  city string, -- column used to store JSON type of data
-  nationkey int,
-  email varchar,
-  createdatetime TIMESTAMP_NTZ,
-  MICode varchar(10),
-  constraint CUST_UK unique (NAME)
-);
-
-INSERT INTO CUSTOMERS VALUES 
-(1,'Alice Franklin','F','New York',10018, 'alice@hotmail.com', '2013-05-08T23:39:20.123','AF_1'),
-(2,'Dan Smith','M','San Francisco',10039, 'd.smith@gmail.com', '2013-05-08T23:39:20.123','SF_2'),
-(3,'Brian Jones','M','Chicago',10024, 'bjones@hotmail.com', '2013-05-09T23:39:20.123','BJ_3'),
-(4,'Ethan Brown','M','Houston',10011, 'ethanbrown@hotmail.com', '2013-05-10T23:39:20.123','EB_4'),
-(5,'Lily Scott','F','Chicago',10052, 'lscott@gmail.com', '2013-05-12T23:39:20.123','LS_5'),
-(6,'Lily Scott','F','Chicago',10052, 'lscott@gmail.com', '2013-05-12T23:39:20.123','LS_5');
---select * from customers
-
-CREATE ROLE IF NOT EXISTS DE_ROLE;
-CREATE ROLE IF NOT EXISTS DA_ROLE;
- 
-GRANT ROLE DE_ROLE TO USER VAIP;
-GRANT ROLE DA_ROLE TO USER VAIP;
- 
-GRANT USAGE ON WAREHOUSE COMPUTE_WH TO ROLE DE_ROLE;
-GRANT USAGE ON WAREHOUSE COMPUTE_WH TO ROLE DA_ROLE;
- 
- 
-GRANT USAGE ON DATABASE DB_DG TO ROLE DA_ROLE;
-GRANT USAGE ON SCHEMA DB_DG.SCH_DG TO ROLE DA_ROLE;
-GRANT SELECT ON TABLE DB_DG.SCH_DG.CUSTOMERS TO ROLE DA_ROLE;
-
-use role accountadmin;
-GRANT USAGE ON DATABASE DB_DG TO ROLE DE_ROLE;
-GRANT USAGE ON SCHEMA DB_DG.SCH_DG TO ROLE DE_ROLE;
-GRANT SELECT,update ON TABLE DB_DG.SCH_DG.CUSTOMERS TO ROLE DE_ROLE;
-EOT
-}
-delete {
-  statements = "select 1;"
-
+depends_on = [module.snowflake_database]
 }
 
+
+module "snowflake_schema_change_history" {
+  source           = "../modules/snowflake_schema"
+  database    = "SILVER_QUT"
+  schema      = "SCHEMACHANGE"
+  comment   = "This is a schema to track change history"
+  data_retention_days = -1
+  is_managed = false
+  is_transient = false
+  depends_on = [module.snowflake_database]
 }
+module "snowflake_format_parquet" {
+  source      = "../modules/snowflake_format_parquet"
+  name        = "FORMAT_PARQUET"
+  database    = "SILVER_QUT"
+  schema      = "WELLSVIEW"
+  format_type = "PARQUET"
+depends_on = [module.snowflake_schema]
+}
+
+module "snowflake_integration" {
+  source           = "../modules/snowflake_integration"
+  name    = "INTEGRATION_SILVER_QUT"
+  type    = "EXTERNAL_STAGE"
+  enabled = true
+  azure_tenant_id = "1aa51068-11a6-4bd2-8646-1fff31a30ffc"
+  storage_allowed_locations =["azure://edpdevarmdlsuw2001.blob.core.windows.net/bakeoff-snowflake/"]
+  storage_provider = "AZURE"
+}
+
+module "snowflake_stage" {
+  source           = "../modules/snowflake_stage"
+  name        = "STAGE_SILVER"
+  url         = "azure://edpdevarmdlsuw2001.blob.core.windows.net/bakeoff-snowflake/Wellview_DL_type2"
+  database    = "SILVER_QUT"
+  schema      = "WELLSVIEW"
+  depends_on = [module.snowflake_schema]
+} 
