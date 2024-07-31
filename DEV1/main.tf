@@ -51,7 +51,7 @@ module "snowflake_schema" {
   is_transient = false
 }
 
-module "snowflake_schema_change_history" {
+/*module "snowflake_schema_change_history" {
   source           = "../modules/snowflake_schema"
   database    = "SILVER_DEV"
   schema      = "SCHEMACHANGE"
@@ -59,8 +59,8 @@ module "snowflake_schema_change_history" {
   data_retention_days = -1
   is_managed = false
   is_transient = false
-}
-/*module "snowflake_file_format" {
+}*/
+module "snowflake_file_format" {
   source           = "../modules/snowflake_format_parquet"
   name        = "FORMAT_PARQUET"
   database    = "SILVER_DEV"
@@ -84,5 +84,5 @@ module "snowflake_stage" {
   url         = "azure://edpdevarmdlsuw2001.blob.core.windows.net/bakeoff-snowflake/Wellview_DL_type2"
   database    = "SILVER_DEV"
   schema      = "WELLSVIEW"
-} */
+} 
 
