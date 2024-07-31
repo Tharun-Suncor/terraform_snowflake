@@ -1,4 +1,4 @@
-terraform {
+/*terraform {
   required_providers {
     snowflake = {
       source  = "Snowflake-Labs/snowflake"
@@ -88,4 +88,4 @@ module "snowflake_stage" {
   url         = "azure://edpdevarmdlsuw2001.blob.core.windows.net/bakeoff-snowflake/Wellview_DL_type2"
   database    = "SILVER_DEV"
   schema      = "WELLSVIEW"
-}
+} */
