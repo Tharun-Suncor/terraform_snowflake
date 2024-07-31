@@ -1,14 +1,14 @@
-variable "schema_name" {
+variable "schema" {
   description = "The name of the schema to create."
   type        = string
 }
 
-variable "database_name" {
+variable "database" {
   description = "The name of the database in which to create the schema."
   type        = string
 }
 
-variable "schema_comment" {
+variable "comment" {
   description = "A comment or description for the schema."
   type        = string
   default     = ""
