@@ -22,7 +22,7 @@ jobs:
       ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
     defaults:
       run:
-        working-directory: "./Project1Dev/"
+        working-directory: "./Project1QUT/"
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
