@@ -52,7 +52,7 @@ module "snowflake_schema" {
   is_transient = false
 }
 
-module "snowflake_schema" {
+module "snowflake_schema_change_history" {
   source           = "../modules/snowflake_schema"
   
   database_name    = "SILVER_DEV"
