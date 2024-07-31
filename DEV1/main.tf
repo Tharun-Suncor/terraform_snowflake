@@ -14,7 +14,7 @@ provider "snowflake" {
   role        = var.snowflake_role
 }
 module "snowflake_warehouse" {
-  source = "./modules/snowflake_warehouse"
+  source = "../modules/snowflake_warehouse"
 
   name                                  = "COMPUTE_WH_DEV"
   comment                               = "This is warehouse"
@@ -33,7 +33,7 @@ module "snowflake_warehouse" {
 
 
 module "snowflake_database" {
-  source = "./modules/snowflake_database"
+  source = "../modules/snowflake_database"
 
   name                        = "SILVER_DEV"
   is_transient                = false
@@ -42,7 +42,7 @@ module "snowflake_database" {
 }
 
 module "snowflake_schema" {
-  source           = "./modules/snowflake_schema"
+  source           = "../modules/snowflake_schema"
   
   database_name    = "SILVER_DEV"
   schema_name      = "WELLS_VIEW"
@@ -53,7 +53,7 @@ module "snowflake_schema" {
 }
 
 module "snowflake_schema" {
-  source           = "./modules/snowflake_schema"
+  source           = "../modules/snowflake_schema"
   
   database_name    = "SILVER_DEV"
   schema_name      = "SCHEMA_CHANGE"
