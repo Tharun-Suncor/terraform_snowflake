@@ -74,7 +74,6 @@ module "snowflake_file_format" {
 module "snowflake_storage_integration" {
   source           = "../modules/snowflake_integration"
   name    = "INTEGRATION_SILVER_DEV"
-  comment = "A storage integration"
   type    = "EXTERNAL_STAGE"
   enabled = true
   azure_tenant_id = "1aa51068-11a6-4bd2-8646-1fff31a30ffc"
