@@ -16,7 +16,7 @@ variable "azure_tenant_id" {
 }
 variable "storage_allowed_locations" {
   description = "Mention location"
-  type        = string
+  type        = list
 }
 variable "storage_provider" {
   description = "Mention provider"
