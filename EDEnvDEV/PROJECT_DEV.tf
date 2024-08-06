@@ -1,7 +1,7 @@
 
 
 # Snowflake Warehouses
-module "compute_wh_qut" {
+module "compute_wh_qut_Project" {
   source   = "../modules/snowflake_warehouse"
   name     = "COMPUTE_WH_PROJECT_QUT"
   size     = "X-SMALL"
