@@ -8,8 +8,6 @@ on:
       - main
     paths: 
       - 'terraform_infra/**'
-    paths-ignore:
-      - '.github/workflows/**'
   workflow_dispatch:
 
 jobs:
