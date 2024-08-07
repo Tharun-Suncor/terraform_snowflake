@@ -38,10 +38,11 @@ jobs:
           echo "Changed folders: $changed_folders"
           matrix_json=$(echo "$changed_folders" | jq -R -s -c 'split("\n")[:-1] | map(select(length > 0)) | map({
             folderName: .,
-            environment: (split("/") | .[-1] | ascii_downcase)
+            environment: (split("/") | .[-1] | split("_") | .[-1] | ascii_downcase)
           })')
           echo "Matrix JSON: $matrix_json"
           echo "changedFoldersMatrix=$matrix_json" >> $GITHUB_OUTPUT
+
 
   call-terraform-deployment:
     needs: Generate-Workflows
