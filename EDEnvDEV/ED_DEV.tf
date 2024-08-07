@@ -2,7 +2,7 @@
 # Snowflake Warehouses
 module "compute_wh_qut_ED" {
   source   = "../modules/snowflake_warehouse"
-  name     = "COMPUTE_WH_ED_QUT"
+  name     = "COMPUTE_1WH_ED_QUT"
   size     = "X-SMALL"
   comment  = "Compute warehouse for QUT environment"
   auto_suspend                          = 60
