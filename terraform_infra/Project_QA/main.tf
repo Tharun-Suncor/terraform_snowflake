@@ -32,7 +32,7 @@ module "COMPUTE_WH_PRJ_QUT" {
 }
 
 module "snowflake_database" {
-  source = ".../modules/snowflake_database"
+  source = "../../modules/snowflake_database"
 
   name                        = "PROJECT1_QUT"
   is_transient                = false

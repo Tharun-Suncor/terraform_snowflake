@@ -14,7 +14,7 @@ provider "snowflake" {
   role        = var.snowflake_role
 }
 module "M_COMPUTE_WH_ED_QUT" {
-  source = "../modules/snowflake_warehouse"
+  source = "../../modules/snowflake_warehouse"
 
   name                                  = "COMPUTE_WH_ED_QUT"
   comment                               = "This is warehouse"
@@ -33,7 +33,7 @@ module "M_COMPUTE_WH_ED_QUT" {
 
 
 module "snowflake_database_ED" {
-  source = ".../modules/snowflake_database"
+  source = "../../modules/snowflake_database"
 
   name                        = "SILVER_QUT"
   is_transient                = false
