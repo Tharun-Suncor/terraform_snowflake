@@ -15,7 +15,7 @@ provider "snowflake" {
 }
 
 module "COMPUTE_WH_PRJ_QUT" {
-  source = ".../modules/snowflake_warehouse"
+  source = "../..modules/snowflake_warehouse"
 
   name                                  = "COMPUTE_WHH_PROJECT1_QUT"
   comment                               = "This  i  s   w arehouse"
