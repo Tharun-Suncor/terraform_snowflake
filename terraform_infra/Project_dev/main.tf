@@ -39,3 +39,12 @@ module "snowflake_database" {
   comment                     = "This is d at abase"
   data_retention_time_in_days = 1
 }
+
+module "snowflake_database2" {
+  source = "../../modules/snowflake_database"
+
+  name                        = "PROJECT23_QUT"
+  is_transient                = false
+  comment                     = "This is d at abase"
+  data_retention_time_in_days = 1
+}
