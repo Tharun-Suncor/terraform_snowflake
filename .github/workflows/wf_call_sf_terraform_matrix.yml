@@ -1,0 +1,44 @@
+name: wf_call_sf_terraform_matrix
+
+on:
+  push:
+    branches:
+      - dev
+      - qut
+      - main
+    paths: 
+      - 'terraform_infra/**'
+    paths-ignore:
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+jobs:
+  Generate-Workflows:
+    runs-on: ubuntu-latest
+    outputs:
+      changedFoldersMatrix: ${{ steps.generate-matrix.outputs.changedFoldersMatrix }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Generate matrix
+        id: generate-matrix
+        run: |
+          changed_folders=$(git diff --name-only HEAD~1 HEAD | grep 'terraform_infra/' | sed 's|/[^/]*$||' | sort -u | jq -R -s -c 'split("\n")[:-1] | map({"folderName": .})')
+          echo "changedFoldersMatrix=$changed_folders" >> $GITHUB_OUTPUT
+
+  deploy:
+    if: needs.Generate-Workflows.outputs.changedFoldersMatrix != '[]' && needs.Generate-Workflows.outputs.changedFoldersMatrix != ''
+    needs: 
+      - Generate-Workflows
+    strategy:
+      matrix: ${{ fromJSON(needs.Generate-Workflows.outputs.changedFoldersMatrix) }}
+    steps:
+      - name: Call Terraform Deployment
+        uses: ./.github/workflows/wf_sf_terraform_deploy.yml
+        with:
+          environment: ${{ matrix.folderName | split("/") | last | split("_") | last | lower }}
+          path: ${{ matrix.folderName }}
+        secrets: inherit
