@@ -40,6 +40,11 @@ jobs:
       matrix: 
         include: ${{ fromJSON(needs.Generate-Workflows.outputs.changedFoldersMatrix) }}
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Ensure all history is available for file paths
+
       - name: Extract environment from folder name
         id: extract-env
         run: |
