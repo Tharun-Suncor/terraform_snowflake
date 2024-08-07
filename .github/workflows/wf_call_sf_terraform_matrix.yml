@@ -60,5 +60,5 @@ jobs:
     uses: ./.github/workflows/wf_sf_terraform_deploy.yml
     with:
       environment: ${{ needs.deploy.outputs.environment }}
-      path: ${{ matrix.folderName }}
+      path: ${{ matrix.folderName }}/
     secrets: inherit
