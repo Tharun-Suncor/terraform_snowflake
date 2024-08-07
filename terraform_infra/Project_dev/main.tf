@@ -14,8 +14,8 @@ provider "snowflake" {
   role        = var.snowflake_role
 }
 
-module "COMPUTE_WH_PRJ_QUT" {
-  source = "../..modules/snowflake_warehouse"
+module "snowflake_warehouse" {
+  source = "../../modules/snowflake_warehouse"
 
   name                                  = "COMPUTE_WHH_PROJECT1_QUT"
   comment                               = "This  i  s   w arehouse"
