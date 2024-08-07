@@ -37,7 +37,7 @@ module "snowflake_database_ED" {
 
   name                        = "SILVER_QUT"
   is_transient                = false
-  comment                     = "This    i c s  database"
+  comment                     = "This    i  c s  database"
   data_retention_time_in_days = 1
 }
 
