@@ -17,7 +17,7 @@ provider "snowflake" {
 module "snowflake_warehouse" {
   source = "../../modules/snowflake_warehouse"
 
-  name                                  = "COMPUTE_WHH_PROJECT1_QUT"
+  name                                  = "COMPUTE_WHHHH_PROJECT1_QUT"
   comment                               = "This  i  s   w arehouse"
   size                                  = "XSMALL"
   auto_suspend                          = 60
@@ -34,7 +34,7 @@ module "snowflake_warehouse" {
 module "snowflake_database" {
   source = "../../modules/snowflake_database"
 
-  name                        = "PROJECT11_QUT"
+  name                        = "PROJECT111_QUT"
   is_transient                = false
   comment                     = "This is d at abase"
   data_retention_time_in_days = 1
