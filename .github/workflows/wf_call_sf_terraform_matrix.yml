@@ -33,10 +33,18 @@ jobs:
       - Generate-Workflows
     strategy:
       matrix: ${{ fromJSON(needs.Generate-Workflows.outputs.changedFoldersMatrix) }}
+    runs-on: ubuntu-latest
     steps:
+      - name: Extract Environment from Folder Name
+        id: extract-env
+        run: |
+          folderName="${{ matrix.folderName }}"
+          environment=$(echo "$folderName" | awk -F'_' '{print tolower($NF)}')
+          echo "environment=$environment" >> $GITHUB_ENV
+
       - name: Call Terraform Deployment
         uses: ./.github/workflows/wf_sf_terraform_deploy.yml
         with:
-          environment: ${{ matrix.folderName | split("/") | last | split("_") | last | lower }}
+          environment: ${{ env.environment }}
           path: ${{ matrix.folderName }}
-        secrets: inherit
+          secrets: inherit
