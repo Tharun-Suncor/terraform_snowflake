@@ -16,7 +16,7 @@ provider "snowflake" {
 module "M_COMPUTE_WH_ED_QUT" {
   source = "../../modules/snowflake_warehouse"
 
-  name                                  = "COMPUTE_WHH_ED_QUT"
+  name                                  = "COMPUTE_WHHH_ED_QUT"
   comment                               = "This is warehouse"
   size                                  = "XSMALL"
   auto_suspend                          = 60
@@ -35,7 +35,7 @@ module "M_COMPUTE_WH_ED_QUT" {
 module "snowflake_database_ED" {
   source = "../../modules/snowflake_database"
 
-  name                        = "SILVER_QUT"
+  name                        = "SILVERR_QUT"
   is_transient                = false
   comment                     = "This i  c s  database"
   data_retention_time_in_days = 1

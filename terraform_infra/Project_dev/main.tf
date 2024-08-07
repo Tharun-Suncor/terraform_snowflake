@@ -34,7 +34,7 @@ module "snowflake_warehouse" {
 module "snowflake_database" {
   source = "../../modules/snowflake_database"
 
-  name                        = "PROJECT1_QUT"
+  name                        = "PROJECT11_QUT"
   is_transient                = false
   comment                     = "This is d at abase"
   data_retention_time_in_days = 1
