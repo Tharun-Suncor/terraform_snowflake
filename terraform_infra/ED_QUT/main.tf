@@ -16,7 +16,7 @@ provider "snowflake" {
 module "M_COMPUTE_WH_ED_QUT" {
   source = "../../modules/snowflake_warehouse"
 
-  name                                  = "COMPUTE_WH_ED_QUT"
+  name                                  = "COMPUTE_WHH_ED_QUT"
   comment                               = "This is warehouse"
   size                                  = "XSMALL"
   auto_suspend                          = 60
