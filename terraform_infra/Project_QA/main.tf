@@ -36,6 +36,6 @@ module "snowflake_database" {
 
   name                        = "PROJECT1_QUT"
   is_transient                = false
-  comment                     = "This is database"
+  comment                     = "This is dat abase"
   data_retention_time_in_days = 1
 }
