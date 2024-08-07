@@ -51,4 +51,4 @@ jobs:
         with:
           environment: ${{ env.environment }}
           path: ${{ matrix.folderName }}
-        secrets: inherit
+          secrets: inherit
