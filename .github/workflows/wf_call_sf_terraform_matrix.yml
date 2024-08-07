@@ -52,6 +52,6 @@ jobs:
         include: ${{ fromJSON(needs.Generate-Workflows.outputs.changedFoldersMatrix) }}
     uses: ./.github/workflows/wf_sf_terraform_deploy.yml
     with:
-      environment: ${{ matrix.folderName }}
+      environment: ${{ matrix.environment }}
       path: ${{ matrix.folderName }}
     secrets: inherit
