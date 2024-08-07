@@ -1,0 +1,48 @@
+name: wf_sf_terraform_deploy_matrix
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+      path:
+        required: true
+        type: string
+
+jobs:
+  Build_and_deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    env:
+      # Snowflake Variables
+      TF_VAR_snowflake_account: ${{ vars.SNOWFLAKE_ACCOUNT }}
+      TF_VAR_snowflake_password: ${{ secrets.SNOWFLAKE_PASSWORD }}
+      TF_VAR_snowflake_username: ${{ vars.SNOWFLAKE_USERNAME }}
+      TF_VAR_snowflake_role: ${{ vars.SNOWFLAKE_ROLE }}
+
+    defaults:
+      run:
+        working-directory: ${{ inputs.path }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.3
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -out=plan.out
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve plan.out
