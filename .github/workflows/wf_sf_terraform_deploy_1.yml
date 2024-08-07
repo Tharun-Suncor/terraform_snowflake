@@ -1,4 +1,4 @@
-name: wf_sf_terraform_deploy
+name: wf_sf_terraform_deploy_
 
 on:
   workflow_call:
