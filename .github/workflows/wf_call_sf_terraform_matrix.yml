@@ -27,18 +27,18 @@ jobs:
           echo "Generating changed folders matrix..."
           changed_folders=$(git diff --name-only HEAD~1 HEAD | grep 'terraform_infra/' | sed 's|/[^/]*$||' | sort -u)
           echo "Changed folders: $changed_folders"
-          matrix_json=$(echo "$changed_folders" | jq -R -s -c 'split("\n")[:-1] | map(select(length > 0)) | map({"folderName": ., "environment": (. | split("/")[-1] | split("_")[-1] | ascii_downcase)})')
+          matrix_json=$(echo "$changed_folders" | jq -R -s -c 'split("\n")[:-1] | map(select(length > 0)) | map({"folderName": .})')
           echo "Matrix JSON: $matrix_json"
           echo "changedFoldersMatrix=$matrix_json" >> $GITHUB_OUTPUT
 
-  terraform-deploy:
+  call-terraform-deployment:
+    needs: Generate-Workflows
     if: needs.Generate-Workflows.outputs.changedFoldersMatrix != '[]' && needs.Generate-Workflows.outputs.changedFoldersMatrix != ''
-    needs:
-      - Generate-Workflows
     strategy:
-      matrix: ${{ fromJSON(needs.Generate-Workflows.outputs.changedFoldersMatrix) }}
+      matrix: 
+        include: ${{ fromJSON(needs.Generate-Workflows.outputs.changedFoldersMatrix) }}
     uses: ./.github/workflows/wf_sf_terraform_deploy.yml
     with:
-      environment: ${{ matrix.environment }}
+      environment: ${{ matrix.folderName }}
       path: ${{ matrix.folderName }}
     secrets: inherit
