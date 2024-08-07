@@ -27,38 +27,18 @@ jobs:
           echo "Generating changed folders matrix..."
           changed_folders=$(git diff --name-only HEAD~1 HEAD | grep 'terraform_infra/' | sed 's|/[^/]*$||' | sort -u)
           echo "Changed folders: $changed_folders"
-          matrix_json=$(echo "$changed_folders" | jq -R -s -c 'split("\n")[:-1] | map({"folderName": .})')
+          matrix_json=$(echo "$changed_folders" | jq -R -s -c 'split("\n")[:-1] | map(select(length > 0)) | map({"folderName": ., "environment": (. | split("/")[-1] | split("_")[-1] | ascii_downcase)})')
           echo "Matrix JSON: $matrix_json"
           echo "changedFoldersMatrix=$matrix_json" >> $GITHUB_OUTPUT
 
-  deploy:
-    runs-on: ubuntu-latest
+  terraform-deploy:
     if: needs.Generate-Workflows.outputs.changedFoldersMatrix != '[]' && needs.Generate-Workflows.outputs.changedFoldersMatrix != ''
-    needs: 
+    needs:
       - Generate-Workflows
     strategy:
-      matrix: 
-        include: ${{ fromJSON(needs.Generate-Workflows.outputs.changedFoldersMatrix) }}
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Ensure all history is available for file paths
-
-      - name: Extract environment from folder name
-        id: extract-env
-        run: |
-          FOLDER_NAME="${{ matrix.folderName }}"
-          echo "Extracting environment from folder name: $FOLDER_NAME"
-          ENVIRONMENT=$(basename "$FOLDER_NAME" | awk -F_ '{print tolower($NF)}')
-          echo "Extracted environment: $ENVIRONMENT"
-          echo "environment=$ENVIRONMENT" >> $GITHUB_ENV
-
-          
-  call-terraform-deployment:
-    needs: deploy
+      matrix: ${{ fromJSON(needs.Generate-Workflows.outputs.changedFoldersMatrix) }}
     uses: ./.github/workflows/wf_sf_terraform_deploy.yml
     with:
-      environment: ${{ needs.deploy.outputs.environment }}
-      path: ${{ matrix.folderName }}/
+      environment: ${{ matrix.environment }}
+      path: ${{ matrix.folderName }}
     secrets: inherit
