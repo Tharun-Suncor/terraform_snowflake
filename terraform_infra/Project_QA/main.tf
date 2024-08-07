@@ -15,7 +15,7 @@ provider "snowflake" {
 }
 
 module "COMPUTE_WH_PRJ_QUT" {
-  source = "../modules/snowflake_warehouse"
+  source = ".../modules/snowflake_warehouse"
 
   name                                  = "COMPUTE_WH_PROJECT1_QUT"
   comment                               = "This  i  s   w arehouse"
@@ -32,7 +32,7 @@ module "COMPUTE_WH_PRJ_QUT" {
 }
 
 module "snowflake_database" {
-  source = "../modules/snowflake_database"
+  source = ".../modules/snowflake_database"
 
   name                        = "PROJECT1_QUT"
   is_transient                = false

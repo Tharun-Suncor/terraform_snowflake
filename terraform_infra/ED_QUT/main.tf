@@ -33,7 +33,7 @@ module "M_COMPUTE_WH_ED_QUT" {
 
 
 module "snowflake_database_ED" {
-  source = "../modules/snowflake_database"
+  source = ".../modules/snowflake_database"
 
   name                        = "SILVER_QUT"
   is_transient                = false
