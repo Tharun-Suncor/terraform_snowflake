@@ -21,13 +21,25 @@ jobs:
         with:
           fetch-depth: 0  # Fetch full history to ensure HEAD~1 is available
 
+      # - name: Generate matrix
+      #   id: generate-matrix
+      #   run: |
+      #     echo "Generating changed folders matrix..."
+      #     changed_folders=$(git diff --name-only HEAD~1 HEAD | grep 'terraform_infra/' | sed 's|/[^/]*$||' | sort -u)
+      #     echo "Changed folders: $changed_folders"
+      #     matrix_json=$(echo "$changed_folders" | jq -R -s -c 'split("\n")[:-1] | map(select(length > 0)) | map({"folderName": .})')
+      #     echo "Matrix JSON: $matrix_json"
+      #     echo "changedFoldersMatrix=$matrix_json" >> $GITHUB_OUTPUT
       - name: Generate matrix
         id: generate-matrix
         run: |
           echo "Generating changed folders matrix..."
           changed_folders=$(git diff --name-only HEAD~1 HEAD | grep 'terraform_infra/' | sed 's|/[^/]*$||' | sort -u)
           echo "Changed folders: $changed_folders"
-          matrix_json=$(echo "$changed_folders" | jq -R -s -c 'split("\n")[:-1] | map(select(length > 0)) | map({"folderName": .})')
+          matrix_json=$(echo "$changed_folders" | jq -R -s -c 'split("\n")[:-1] | map(select(length > 0)) | map({
+            folderName: .,
+            environment: (split("/") | .[-1] | ascii_downcase)
+          })')
           echo "Matrix JSON: $matrix_json"
           echo "changedFoldersMatrix=$matrix_json" >> $GITHUB_OUTPUT
 
