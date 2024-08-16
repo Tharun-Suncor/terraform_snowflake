@@ -1,0 +1,78 @@
+name: wf_deploy_manual
+
+on:
+  workflow_dispatch:
+    inputs:
+      deployment:
+        description: "environment"
+        type: choice
+        options:
+          - "dev"
+          - "qut"
+          - "main"
+
+jobs:
+  validate_files_names:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # Fetch all history for all branches and tags
+        
+    - name: Get Changed Files When Pull Request
+      id: get-changed-files
+      run: |
+        git fetch origin main
+        changed_files=$(git diff --diff-filter=AMDR --name-only origin/main...HEAD)
+        changed_sql_files=$(echo "$changed_files" | grep '^SILVER/.*\.sql$' || echo "")
+        echo "Number of changed SQL files: $(echo "$changed_sql_files" | grep -c '^')"
+        printf "Changed SQL files:\n$changed_sql_files\n"
+        echo "changed_files<<EOF" >> $GITHUB_ENV
+        echo "$changed_sql_files" >> $GITHUB_ENV
+        echo "EOF" >> $GITHUB_ENV
+
+    - name: Validate file names in feature branch
+      run: |
+        # Get list of new or modified .sql files
+        readarray -t new_or_modified_files <<< "$changed_files"
+        echo "New or modified SQL files:"
+        printf '%s\n' "${new_or_modified_files[@]}"
+        
+        # Check if there are no new or modified SQL files
+        if [ ${#new_or_modified_files[@]} -eq 0 ]; then
+          echo "No new or modified SQL files found in this pull request."
+          exit 0
+        fi
+        
+        # Initialize a variable to track invalid files
+        invalid_files=""
+        
+        # Loop over each file in the array and check naming conventions
+        for file in "${new_or_modified_files[@]}"; do
+          if [ ! -f "$file" ]; then
+            # File has been deleted, no need to check naming convention
+            continue
+          fi
+          filename=$(basename "$file")
+          if ! [[ $filename =~ ^(R__|A__)[A-Za-z0-9_]+\.sql$ ]]; then
+            # File does not match the required pattern (no spaces allowed and must start with R__ or A__)
+            invalid_files+="$filename "
+          fi
+        done
+        
+        # Check if there are any invalid files
+        if [ -n "$invalid_files" ]; then
+          echo "Error: Some files do not meet the naming criteria."
+          echo "Please review the naming convention details below and update the file names accordingly:"
+          echo "- File names should not contain spaces."
+          echo "- Repeatable files should have the prefix 'R__' followed by a descriptive name."
+          echo "- Always files should have the prefix 'A__' followed by a descriptive name."
+          echo "Please ensure all file names adhere to this convention."
+          echo "Error: The following files do not meet the naming criteria."
+          echo "Invalid files:"
+          echo "$invalid_files"
+          exit 1
+        else
+          echo "All file names are valid."
+        fi
