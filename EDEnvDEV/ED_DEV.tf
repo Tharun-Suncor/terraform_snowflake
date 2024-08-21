@@ -24,5 +24,6 @@ module "snowflake_tag_module" {
   database_name  = "TEST"
   schema_name    = "SCH_TEST"
   allowed_values = ["finance", "engineering"]
+  comment        = "sample tag"
 }
 
