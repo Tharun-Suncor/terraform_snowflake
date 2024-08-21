@@ -10,7 +10,7 @@ module "ROLE_1" {
 # Snowflake role
 module "DB_ROLE_1" {
   source   = "../modules/snowflake_database_role"
-  database = "SNOWFLAKE"
+  database = "TEST"
   name     = "DB_ROLE"
   comment  = "DB role"
 
