@@ -1,11 +1,8 @@
 
-# Snowflake Warehouses
-module "compute_wh_qut_ED" {
-  source   = "../modules/snowflake_warehouse"
-  name     = "COMPUTE_1WH_ED_QUT"
-  size     = "X-SMALL"
-  comment  = "Compute warehouse for QUT environment"
-  auto_suspend                          = 60
-  auto_resume                           = true
-  initially_suspended                   = true
+# Snowflake role
+module "ROLE_1" {
+  source   = "../modules/snowflake_role"
+  name     = "DA_ROLE"
+  comment  = "Data analyst role"
+
 }
