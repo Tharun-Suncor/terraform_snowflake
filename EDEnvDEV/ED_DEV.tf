@@ -20,7 +20,7 @@ module "DB_ROLE_1" {
 module "snowflake_tag_module" {
   source = "../modules/snowflake_tag"
 
-  tag_name       = "cost_center"
+  tag_name       = "cost_centerr"
   database_name  = "TEST"
   schema_name    = "SCH_TEST"
   allowed_values = ["finance", "engineering"]
