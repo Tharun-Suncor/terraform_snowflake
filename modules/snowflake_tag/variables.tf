@@ -19,7 +19,8 @@ variable "allowed_values" {
 }
 
 variable "comment" {
-  description = "A comment for the Snowflake role."
+  description = "A comment for the Snowflake tag."
   type        = string
+  default     = null
 }
 
