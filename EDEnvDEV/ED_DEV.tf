@@ -33,8 +33,12 @@ module "snowflake_masking_policy_module" {
   source = "../modules/snowflake_masking_policy"
 
   name               = "EXAMPLE_MASKING_POLICY"
-  database           = "EXAMPLE_DB"
-  schema             = "EXAMPLE_SCHEMA"
+  database           = "TEST"
+  schema             = "SCH_TEST"
+  
+  signature_column_name  = "val"
+  signature_column_type  = "VARCHAR"
+
   masking_expression = <<-EOF
     case 
       when current_role() in ('ROLE_A') then 
@@ -45,14 +49,12 @@ module "snowflake_masking_policy_module" {
         '******'
     end
   EOF
+  
   return_data_type       = "VARCHAR"
-  signature = {
-    column_name = "val"
-    column_type = "VARCHAR"
-  }
   comment                = "This is a sample masking policy."
   exempt_other_policies  = false
   if_not_exists          = true
   or_replace             = false
 }
+
 
