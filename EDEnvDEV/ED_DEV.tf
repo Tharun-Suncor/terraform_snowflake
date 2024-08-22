@@ -20,7 +20,7 @@ module "DB_ROLE_1" {
 module "snowflake_tag_module" {
   source = "../modules/snowflake_tag"
 
-  tag_name       = "cost_centerr"
+  tag_name       = "cost_centerrr"
   database_name  = "TEST"
   schema_name    = "SCH_TEST"
   allowed_values = ["finance", "engineering"]
@@ -32,7 +32,7 @@ module "snowflake_tag_module" {
 module "snowflake_masking_policy_module" {
   source = "../modules/snowflake_masking_policy"
 
-  name               = "EXAMPLE_MASKING_POLICY"
+  name               = "EXAMPLE_MASKING_POLICYY"
   database           = "TEST"
   schema             = "SCH_TEST"
   
