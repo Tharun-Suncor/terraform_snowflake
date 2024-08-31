@@ -1,20 +1,32 @@
-variable "name" {
-  description = "The name of the Snowflake stage to create."
+variable "internal_stage_name" {
+  description = "Specifies the identifier for the internal stage."
   type        = string
 }
 
-variable "url" {
-  description = "Specifies the URL for the stage"
+variable "database_name" {
+  description = "The database in which to create the stage."
   type        = string
 }
 
-variable "database" {
-  description = "The database where to create stage."
+variable "schema_name" {
+  description = "The schema in which to create the stage."
   type        = string
 }
 
-variable "schema" {
-  description = "The schema where to create stage"
+variable "internal_stage_comment" {
+  description = "Specifies a comment for the internal stage."
   type        = string
-  
+  default     = ""
+}
+
+variable "internal_stage_file_format" {
+  description = "Specifies the file format for the internal stage."
+  type        = string
+  default     = "" # Example: "(TYPE = 'CSV')"
+}
+
+variable "internal_stage_tags" {
+  description = "A map of tags to associate with the internal stage."
+  type        = map(string)
+  default     = {}
 }
